@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Crecimiento Exponencial - Modelos Poblacionales</title>
+    <title>Crecimiento Logístico - Modelos Poblacionales</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
     <style>
@@ -389,8 +389,8 @@
             font-weight: 500;
         }
 
-        /* Ejemplo Práctico */
-        .ejemplo-practico {
+        /* Fases y Ejemplo */
+        .fases-crecimiento, .ejemplo-practico {
             background: linear-gradient(135deg, #fff5f5, #fff0f6);
             padding: 2rem;
             border-radius: 12px;
@@ -398,12 +398,12 @@
             border-left: 4px solid var(--secondary);
         }
 
-        .ejemplo-practico ul {
+        .fases-crecimiento ol, .ejemplo-practico ul {
             margin-left: 1.5rem;
             margin-top: 1rem;
         }
 
-        .ejemplo-practico li {
+        .fases-crecimiento li, .ejemplo-practico li {
             margin-bottom: 0.5rem;
             padding-left: 0.5rem;
         }
@@ -452,29 +452,13 @@
                 justify-content: center;
             }
         }
-
-        /* Animaciones */
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(20px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        .content-section {
-            animation: fadeInUp 0.6s ease-out;
-        }
     </style>
 </head>
 <body>
     <div class="container">
         <header class="main-header">
-            <h1>Crecimiento Exponencial</h1>
-            <p>Modelo Matemático de Desarrollo Poblacional</p>
+            <h1>Crecimiento Logístico</h1>
+            <p>Modelo Realista de Desarrollo Poblacional</p>
         </header>
 
         <nav class="nav-menu">
@@ -482,11 +466,11 @@
                 <i class="fas fa-home"></i>
                 Inicio
             </a>
-            <a href="exponencial.html" class="nav-link active">
+            <a href="exponencial.html" class="nav-link">
                 <i class="fas fa-chart-line"></i>
                 Crecimiento Exponencial
             </a>
-            <a href="logistico.html" class="nav-link">
+            <a href="logistico.html" class="nav-link active">
                 <i class="fas fa-chart-area"></i>
                 Crecimiento Logístico
             </a>
@@ -494,12 +478,12 @@
 
         <main>
             <section class="content-section intro">
-                <h2 class="section-title">¿Qué es el Crecimiento Exponencial?</h2>
-                <p>El crecimiento exponencial describe fenómenos donde la tasa de crecimiento es proporcional al valor actual. Esto resulta en un aumento cada vez más acelerado, característico de sistemas sin restricciones ambientales.</p>
+                <h2 class="section-title">¿Qué es el Crecimiento Logístico?</h2>
+                <p>El crecimiento logístico es un modelo más realista que considera la <strong>capacidad de carga</strong> del ambiente. La población crece rápidamente al principio, pero se ralentiza a medida que se acerca al límite que el ambiente puede soportar, formando la característica curva en "S".</p>
                 
                 <div class="formula-card">
-                    <h3>Fórmula del Modelo Exponencial</h3>
-                    <div class="formula-main">P(t) = P₀ × e<sup>rt</sup></div>
+                    <h3>Fórmula del Modelo Logístico</h3>
+                    <div class="formula-main">P(t) = K / [1 + ((K - P₀)/P₀) × e^(-rt)]</div>
                     <div class="variables-list">
                         <div class="variable-item">
                             <strong>P(t)</strong>
@@ -507,55 +491,62 @@
                         </div>
                         <div class="variable-item">
                             <strong>P₀</strong>
-                            <span>Población inicial (t=0)</span>
+                            <span>Población inicial</span>
                         </div>
                         <div class="variable-item">
                             <strong>r</strong>
                             <span>Tasa de crecimiento intrínseca</span>
                         </div>
                         <div class="variable-item">
-                            <strong>t</strong>
-                            <span>Tiempo transcurrido</span>
+                            <strong>K</strong>
+                            <span>Capacidad de carga</span>
                         </div>
                         <div class="variable-item">
-                            <strong>e</strong>
-                            <span>Constante de Euler (≈ 2.71828)</span>
+                            <strong>t</strong>
+                            <span>Tiempo transcurrido</span>
                         </div>
                     </div>
                 </div>
             </section>
 
             <section class="content-section">
-                <h2 class="section-title">Simulador de Crecimiento Exponencial</h2>
+                <h2 class="section-title">Simulador de Crecimiento Logístico</h2>
                 
                 <div class="form-container">
-                    <form id="form-exponencial">
+                    <form id="form-logistico">
                         <div class="form-row">
                             <div class="form-group">
-                                <label for="p0-exponencial">
+                                <label for="p0-logistico">
                                     <i class="fas fa-seedling"></i>
                                     Población Inicial (P₀)
                                 </label>
-                                <input type="number" id="p0-exponencial" step="0.1" min="0.1" value="10" required>
+                                <input type="number" id="p0-logistico" step="0.1" min="0.1" value="10" required>
                             </div>
                             <div class="form-group">
-                                <label for="r-exponencial">
+                                <label for="r-logistico">
                                     <i class="fas fa-tachometer-alt"></i>
                                     Tasa de Crecimiento (r)
                                 </label>
-                                <input type="number" id="r-exponencial" step="0.01" min="0.01" value="0.5" required>
+                                <input type="number" id="r-logistico" step="0.01" min="0.01" value="0.2" required>
                             </div>
                             <div class="form-group">
-                                <label for="t-exponencial">
-                                    <i class="fas fa-clock"></i>
-                                    Tiempo Máximo (t)
+                                <label for="k-logistico">
+                                    <i class="fas fa-mountain"></i>
+                                    Capacidad de Carga (K)
                                 </label>
-                                <input type="number" id="t-exponencial" min="1" max="100" value="20" required>
+                                <input type="number" id="k-logistico" step="0.1" min="0.1" value="1000" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="t-logistico">
+                                    <i class="fas fa-clock"></i>
+                                    Tiempo (t)
+                                </label>
+                                <input type="number" id="t-logistico" min="1" max="1000" value="100" required>
                             </div>
                         </div>
                         
                         <div class="form-buttons">
-                            <button type="button" onclick="calcularExponencial()" class="btn primary">
+                            <button type="button" onclick="calcularLogistico()" class="btn primary">
                                 <i class="fas fa-calculator"></i>
                                 Calcular Crecimiento
                             </button>
@@ -567,25 +558,25 @@
                     </form>
                 </div>
 
-                <div id="error-exponencial" class="error">
+                <div id="error-logistico" class="error">
                     <i class="fas fa-exclamation-triangle"></i>
                     <span id="error-message"></span>
                 </div>
 
-                <div id="loading-exponencial" class="loading">
+                <div id="loading-logistico" class="loading">
                     <div class="spinner"></div>
-                    <p>Calculando crecimiento exponencial...</p>
+                    <p>Calculando crecimiento logístico...</p>
                 </div>
 
-                <div id="resultado-exponencial" class="resultados">
+                <div id="resultado-logistico" class="resultados">
                     <h3>
                         <i class="fas fa-chart-line"></i>
-                        Resultados del Crecimiento Exponencial
+                        Resultados del Crecimiento Logístico
                     </h3>
                     
                     <div class="grafico-container">
                         <h4>Evolución de la Población</h4>
-                        <div id="grafico-exponencial"></div>
+                        <div id="grafico-logistico"></div>
                     </div>
 
                     <div class="tabla-container">
@@ -595,10 +586,10 @@
                                 <tr>
                                     <th>Tiempo (t)</th>
                                     <th>Población P(t)</th>
-                                    <th>Factor de Crecimiento</th>
+                                    <th>% de Capacidad</th>
                                 </tr>
                             </thead>
-                            <tbody id="tabla-exponencial">
+                            <tbody id="tabla-logistico">
                             </tbody>
                         </table>
                     </div>
@@ -606,54 +597,52 @@
             </section>
 
             <section class="content-section">
-                <h2 class="section-title">Características del Modelo Exponencial</h2>
+                <h2 class="section-title">Características del Modelo Logístico</h2>
                 
                 <div class="caracteristicas-grid">
                     <div class="caracteristica">
-                        <h3>📈 Crecimiento Acelerado</h3>
-                        <p>La velocidad de crecimiento aumenta proporcionalmente al tamaño poblacional actual, generando una curva cada vez más pronunciada.</p>
+                        <h3>📈➡️📉 Curva en S</h3>
+                        <p>La población sigue un patrón sigmoide: crecimiento lento, aceleración y finalmente estabilización.</p>
                     </div>
                     <div class="caracteristica">
-                        <h3>∞ Sin Restricciones</h3>
-                        <p>Modelo teórico que asume recursos ilimitados y ausencia de factores limitantes en el ambiente.</p>
+                        <h3>🏠 Capacidad de Carga</h3>
+                        <p>Existe un límite máximo (K) determinado por los recursos disponibles en el ambiente.</p>
                     </div>
                     <div class="caracteristica">
-                        <h3>⏱️ Duplicación Constante</h3>
-                        <p>El tiempo de duplicación permanece invariable: T<sub>d</sub> = ln(2)/r, independiente del tamaño poblacional.</p>
+                        <h3>⚖️ Autorregulación</h3>
+                        <p>La población se estabiliza naturalmente cerca de la capacidad de carga del ecosistema.</p>
                     </div>
                     <div class="caracteristica">
-                        <h3>🔬 Aplicaciones Reales</h3>
-                        <p>Bacterias en cultivo, interés compuesto, epidemias iniciales, adopción tecnológica temprana.</p>
+                        <h3>🌍 Aplicaciones Reales</h3>
+                        <p>Poblaciones animales, crecimiento de tumores, adopción de tecnologías, dinámicas de mercado.</p>
                     </div>
+                </div>
+
+                <div class="fases-crecimiento">
+                    <h3>
+                        <i class="fas fa-road"></i>
+                        Fases del Crecimiento Logístico
+                    </h3>
+                    <ol>
+                        <li><strong>Fase Lag:</strong> Crecimiento lento inicial por adaptación al ambiente</li>
+                        <li><strong>Fase Exponencial:</strong> Crecimiento acelerado con recursos abundantes</li>
+                        <li><strong>Fase de Desaceleración:</strong> Los recursos se vuelven limitantes</li>
+                        <li><strong>Fase de Estabilización:</strong> La población oscila alrededor de la capacidad de carga</li>
+                    </ol>
                 </div>
 
                 <div class="ejemplo-practico">
                     <h3>
-                        <i class="fas fa-bacteria"></i>
-                        Ejemplo Práctico: Crecimiento Bacteriano
+                        <i class="fas fa-deer"></i>
+                        Ejemplo Práctico: Población de Venados
                     </h3>
-                    <p>Considerando una bacteria con tasa de división constante cada 20 minutos (r ≈ 2.08 h⁻¹):</p>
+                    <p>En un bosque con capacidad para 1000 venados (K=1000), población inicial de 10 venados (P₀=10) y tasa de crecimiento r=0.2:</p>
                     <ul>
-                        <li><strong>1 hora:</strong> 1 → 4 bacterias</li>
-                        <li><strong>2 horas:</strong> 4 → 16 bacterias</li>
-                        <li><strong>4 horas:</strong> 16 → 256 bacterias</li>
-                        <li><strong>8 horas:</strong> 256 → 65,536 bacterias</li>
-                        <li><strong>24 horas:</strong> Teóricamente ≈ 4.7 × 10²¹ bacterias</li>
-                    </ul>
-                </div>
-
-                <div class="ejemplo-practico">
-                    <h3>
-                        <i class="fas fa-money-bill-wave"></i>
-                        Ejemplo Práctico: Interés Compuesto
-                    </h3>
-                    <p>Inversión inicial de $1,000 con tasa de interés anual del 10% (r = 0.1):</p>
-                    <ul>
-                        <li><strong>Año 1:</strong> $1,000 → $1,100</li>
-                        <li><strong>Año 5:</strong> $1,000 → $1,611</li>
-                        <li><strong>Año 10:</strong> $1,000 → $2,594</li>
-                        <li><strong>Año 20:</strong> $1,000 → $6,727</li>
-                        <li><strong>Año 30:</strong> $1,000 → $17,449</li>
+                        <li><strong>Año 10:</strong> ≈ 67 venados (6.7% de capacidad)</li>
+                        <li><strong>Año 20:</strong> ≈ 445 venados (44.5% de capacidad)</li>
+                        <li><strong>Año 30:</strong> ≈ 864 venados (86.4% de capacidad)</li>
+                        <li><strong>Año 40:</strong> ≈ 973 venados (97.3% de capacidad)</li>
+                        <li><strong>Año 50:</strong> ≈ 993 venados (99.3% de capacidad)</li>
                     </ul>
                 </div>
             </section>
@@ -665,20 +654,27 @@
     </div>
 
     <script>
-        // Función de crecimiento exponencial
-        function crecimientoExponencial(t, P0, r) {
-            return P0 * Math.exp(r * t);
+        // Función de crecimiento logístico
+        function crecimientoLogistico(t, P0, r, K) {
+            return K / (1 + ((K - P0) / P0) * Math.exp(-r * t));
         }
 
-        function calcularExponencial() {
+        function calcularLogistico() {
             // Obtener valores del formulario
-            const P0 = parseFloat(document.getElementById('p0-exponencial').value);
-            const r = parseFloat(document.getElementById('r-exponencial').value);
-            const tMax = parseInt(document.getElementById('t-exponencial').value);
+            const P0 = parseFloat(document.getElementById('p0-logistico').value);
+            const r = parseFloat(document.getElementById('r-logistico').value);
+            const K = parseFloat(document.getElementById('k-logistico').value);
+            const tMax = parseInt(document.getElementById('t-logistico').value);
 
             // Validaciones
-            const errorDiv = document.getElementById('error-exponencial');
-            if (P0 <= 0 || r <= 0 || tMax <= 0) {
+            const errorDiv = document.getElementById('error-logistico');
+            if (P0 >= K) {
+                errorDiv.innerHTML = '<i class="fas fa-exclamation-triangle"></i> La población inicial debe ser menor que la capacidad de carga.';
+                errorDiv.style.display = 'block';
+                return;
+            }
+
+            if (P0 <= 0 || r <= 0 || K <= 0 || tMax <= 0) {
                 errorDiv.innerHTML = '<i class="fas fa-exclamation-triangle"></i> Todos los valores deben ser mayores que cero.';
                 errorDiv.style.display = 'block';
                 return;
@@ -687,8 +683,8 @@
             errorDiv.style.display = 'none';
 
             // Mostrar loading
-            const loadingDiv = document.getElementById('loading-exponencial');
-            const resultadosDiv = document.getElementById('resultado-exponencial');
+            const loadingDiv = document.getElementById('loading-logistico');
+            const resultadosDiv = document.getElementById('resultado-logistico');
             loadingDiv.style.display = 'block';
             resultadosDiv.style.display = 'none';
 
@@ -697,33 +693,30 @@
                 // Generar datos
                 const tiempos = [];
                 const poblaciones = [];
-                const factores = [];
+                const porcentajes = [];
 
                 for (let t = 0; t <= tMax; t++) {
-                    const P = crecimientoExponencial(t, P0, r);
+                    const P = crecimientoLogistico(t, P0, r, K);
                     tiempos.push(t);
                     poblaciones.push(P);
-                    factores.push((P / P0).toFixed(2));
+                    porcentajes.push((P / K * 100).toFixed(1));
                 }
 
                 // Actualizar tabla
-                const tablaBody = document.getElementById('tabla-exponencial');
+                const tablaBody = document.getElementById('tabla-logistico');
                 tablaBody.innerHTML = '';
                 
-                // Mostrar puntos clave
+                // Mostrar puntos clave (cada 10% del tiempo total)
                 const step = Math.max(1, Math.floor(tMax / 10));
                 for (let i = 0; i <= tMax; i += step) {
                     const tr = document.createElement('tr');
                     tr.innerHTML = `
                         <td>${i}</td>
                         <td>${poblaciones[i].toFixed(2)}</td>
-                        <td>${factores[i]}x</td>
+                        <td>${porcentajes[i]}%</td>
                     `;
                     tablaBody.appendChild(tr);
                 }
-
-                // Calcular tiempo de duplicación
-                const tiempoDuplicacion = (Math.log(2) / r).toFixed(2);
 
                 // Crear gráfico con Plotly
                 const trace = {
@@ -735,17 +728,26 @@
                     line: { color: '#8a2be2', width: 3 }
                 };
 
+                const capacidadTrace = {
+                    x: [0, tMax],
+                    y: [K, K],
+                    type: 'scatter',
+                    mode: 'lines',
+                    name: 'Capacidad de Carga (K)',
+                    line: { color: '#ff69b4', width: 2, dash: 'dash' }
+                };
+
                 const layout = {
-                    title: `Crecimiento Exponencial - Duplicación cada ${tiempoDuplicacion} unidades de tiempo`,
+                    title: 'Crecimiento Logístico de la Población',
                     xaxis: { title: 'Tiempo' },
-                    yaxis: { title: 'Población', type: 'log' },
+                    yaxis: { title: 'Población' },
                     hovermode: 'closest',
                     showlegend: true,
                     paper_bgcolor: 'rgba(0,0,0,0)',
                     plot_bgcolor: 'rgba(0,0,0,0)'
                 };
 
-                Plotly.newPlot('grafico-exponencial', [trace], layout, { responsive: true });
+                Plotly.newPlot('grafico-logistico', [trace, capacidadTrace], layout, { responsive: true });
 
                 // Mostrar resultados
                 loadingDiv.style.display = 'none';
@@ -755,37 +757,17 @@
         }
 
         function limpiarFormulario() {
-            document.getElementById('p0-exponencial').value = '10';
-            document.getElementById('r-exponencial').value = '0.5';
-            document.getElementById('t-exponencial').value = '20';
-            document.getElementById('error-exponencial').style.display = 'none';
-            document.getElementById('resultado-exponencial').style.display = 'none';
+            document.getElementById('p0-logistico').value = '10';
+            document.getElementById('r-logistico').value = '0.2';
+            document.getElementById('k-logistico').value = '1000';
+            document.getElementById('t-logistico').value = '100';
+            document.getElementById('error-logistico').style.display = 'none';
+            document.getElementById('resultado-logistico').style.display = 'none';
         }
 
         // Inicializar con un cálculo por defecto
         document.addEventListener('DOMContentLoaded', function() {
-            calcularExponencial();
-        });
-
-        // Efectos de scroll suave
-        document.addEventListener('DOMContentLoaded', function() {
-            const sections = document.querySelectorAll('.content-section');
-            
-            const observer = new IntersectionObserver((entries) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        entry.target.style.opacity = '1';
-                        entry.target.style.transform = 'translateY(0)';
-                    }
-                });
-            }, { threshold: 0.1 });
-
-            sections.forEach(section => {
-                section.style.opacity = '0';
-                section.style.transform = 'translateY(20px)';
-                section.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
-                observer.observe(section);
-            });
+            calcularLogistico();
         });
     </script>
 </body>
