@@ -52,15 +52,16 @@ app.layout = html.Div([
     html.Nav(className='navigation', children=[
         html.Div(className='nav-container', children=[
             html.Div(className='nav-links', children=[
-                dcc.Link("Inicio", href='/', className='nav-link'),
-                dcc.Link("Exponencial", href='/exponencial', className='nav-link'),
-                dcc.Link("Logístico", href='/logistico', className='nav-link'),
-                dcc.Link("Exponencial Interactivo", href='/exponencial-interactivo', className='nav-link'),
-                dcc.Link("Logístico Interactivo", href='/logistico-interactivo', className='nav-link'),
-                dcc.Link("Campo Vectorial", href='/campo-vectorial', className='nav-link'),
-                dcc.Link("Modelo SIR", href='/modelo-sir', className='nav-link'),
-                dcc.Link("Modelo SEIR", href='/modelo-seir', className='nav-link')
-            ])
+    dcc.Link("Inicio", href='/', className='nav-link'),
+    dcc.Link("Exponencial", href='/exponencial', className='nav-link'),
+    dcc.Link("Logístico", href='/logistico', className='nav-link'),
+    dcc.Link("Exponencial Interactivo", href='/exponencial-interactivo', className='nav-link'),
+    dcc.Link("Logístico Interactivo", href='/logistico-interactivo', className='nav-link'),
+    dcc.Link("Campo Vectorial", href='/campo-vectorial', className='nav-link'),
+    dcc.Link("Modelo SIR", href='/modelo-sir', className='nav-link'),
+    dcc.Link("API Cripto", href='/api-cripto', className='nav-link'),
+    dcc.Link("Modelo SEIR", href='/modelo-seir', className='nav-link'),
+])
         ])
     ]),
     
